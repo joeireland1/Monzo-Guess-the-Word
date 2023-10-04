@@ -1,0 +1,39 @@
+import random
+
+monzo_words = ["monzo", "plushie", "flex", "pots", "premium", "plus", "trends", "investments"]
+
+def choose_word():
+    return random.choice(monzo_words)
+
+def play_game():
+    word_to_guess = choose_word()
+    guessed_word = ["_"] * len(word_to_guess)
+    attempts = 10
+
+    print("Welcome to Joe's game of Guess the Monzo word!")
+    print(" ".join(guessed_word))
+
+    while attempts > 0 and "_" in guessed_word:
+        guess = input("Guess a letter: ").lower()
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("Invalid input. Please only enter one letter at a time.")
+            continue
+
+        if guess in word_to_guess:
+            for i in range(len(word_to_guess)):
+                if word_to_guess[i] == guess:
+                    guessed_word[i] = guess
+        else:
+            attempts -= 1
+            print(f"That's not right! You have {attempts} attempts left.")
+
+        print(" ".join(guessed_word))
+
+    if "_" not in guessed_word:
+        print("Congratulations! You are a true Monzonaut: " + word_to_guess)
+    else:
+        print("Sad Monzo plushie :( You're out of attempts. The word was: " + word_to_guess)
+
+if __name__ == "__main__":
+    play_game()
